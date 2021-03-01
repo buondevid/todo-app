@@ -35,6 +35,12 @@ select {
   font: inherit;
   color: inherit;
   letter-spacing: inherit;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .new-button {
@@ -72,7 +78,7 @@ select {
   display: grid;
   justify-items: center;
   align-content: space-around;
-  grid-template: 1fr/1fr 2px 2fr 2px 0.5fr;
+  grid-template: 1fr/0.7fr 2px 2fr 2px 0.5fr;
   grid-template-areas: "projects border1 tasks border2 sort";
   background-color: #8d75e6;
   box-shadow: #7863c4 6px 6px 12px 0px inset, #a287ff -6px -6px 12px 0px inset;
@@ -82,6 +88,22 @@ select {
   max-width: 110rem;
   width: 80%;
   height: 80%;
+}
+
+.container__border1 {
+  grid-area: border1;
+  height: 30%;
+  width: 100%;
+  margin: auto;
+  background-color: #a287ff;
+}
+
+.container__border2 {
+  grid-area: border2;
+  height: 30%;
+  width: 100%;
+  margin: auto;
+  background-color: #a287ff;
 }
 
 .container__project {
@@ -105,7 +127,7 @@ select {
 }
 
 .project {
-  padding: 1rem 2rem;
+  padding: 0.2rem 2rem;
   margin: 2rem 0;
   width: 100%;
   max-width: 30rem;
@@ -142,7 +164,7 @@ select {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 90%;
+  height: 70rem;
   width: 100%;
   margin: auto;
   padding: 3rem;
@@ -160,25 +182,34 @@ select {
 .task {
   padding: 1rem 2rem;
   margin: 0.5rem;
-  box-shadow: #7863c4 6px 6px 12px 0px inset, #a287ff -6px -6px 12px 0px inset;
-  -webkit-box-shadow: #7863c4 6px 6px 12px 0px inset, #a287ff -6px -6px 12px 0px inset;
   border-radius: 1rem;
   width: 100%;
+  height: 7rem;
+  /* max-height to transition the task div */
+  overflow-y: hidden;
   color: #c6b8f8;
   border-left: 0.2rem solid red;
+  background-color: #1a1b1e;
+  box-shadow: #151518 0.3rem 0.3rem 0.6rem 0px inset, #242529 -0.3rem -0.3rem 0.6rem 0px inset;
+  -webkit-box-shadow: #151518 0.3rem 0.6rem 0.3rem 0.2rem inset, #404147 -0.3rem -0.3rem 0.6rem 0.2rem inset;
+  transition: height 0.5s ease-out;
+  flex-shrink: 0;
 }
-.task input, .task textarea, .task select {
+.task input,
+.task textarea,
+.task select {
   margin: 1rem;
-  border: 0.2rem solid #a287ff;
   border-radius: 0.5rem;
   background: transparent;
   outline: 0;
+  border: 0.01rem solid grey;
   cursor: pointer;
   font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
 }
 .task input[type=text] {
   width: 90%;
   padding-left: 0.7rem;
+  border-style: none;
 }
 .task input[type=text]::-moz-placeholder {
   color: #c6b8f8;
@@ -188,6 +219,9 @@ select {
 }
 .task input[type=text]::placeholder {
   color: #c6b8f8;
+}
+.task .task_edit-active[class] {
+  border: 0.2rem solid #a287ff;
 }
 .task input[type=checkbox] {
   width: 2rem;
@@ -201,13 +235,26 @@ select {
 .task select option {
   background-color: #8d75e6;
 }
+.task select:disabled {
+  border: 0.01rem solid grey;
+}
 .task input[type=date] {
   padding: 0 1rem;
+}
+.task input[type=date]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 2px;
+  opacity: 0.6;
+  filter: invert(0.7);
+}
+.task input[type=date]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
 }
 .task textarea {
   width: 96.5%;
   height: 15rem;
-  padding-left: 0.6rem;
+  padding-left: 0.5rem;
 }
 .task textarea::-moz-placeholder {
   color: #c6b8f8;
@@ -224,29 +271,70 @@ select {
   align-items: center;
 }
 .task_normal {
-  border-left: 0.3rem solid red;
+  border-left: 0.4rem solid red;
 }
 .task_medium {
-  border-left: 0.3rem solid #ffc400;
+  border-left: 0.4rem solid #ffc400;
 }
 .task_urgent {
-  border-left: 0.3rem solid green;
+  border-left: 0.4rem solid green;
+}
+.task__edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.task__edit a {
+  margin: 0 2rem 0.5rem;
+  font-size: 2.5rem;
+}
+.task__edit a:first-child {
+  font-size: 2.65rem;
+}
+.task__edit a:hover {
+  opacity: 0.8;
 }
 
-.container__border1 {
-  grid-area: border1;
-  height: 80%;
-  width: 100%;
-  margin: auto;
-  background-color: #a287ff;
+.checkbox {
+  display: grid;
+  grid-template-columns: -webkit-min-content auto;
+  grid-template-columns: min-content auto;
+  grid-gap: 0.5em;
+  font-size: 2rem;
+  color: #a287ff;
 }
 
-.container__border2 {
-  grid-area: border2;
-  height: 80%;
-  width: 100%;
-  margin: auto;
-  background-color: #a287ff;
+.checkbox__control {
+  display: inline-grid;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.25em;
+  border: 0.1em solid currentColor;
+}
+.checkbox__control svg {
+  transition: transform 0.1s ease-in 25ms;
+  transform: scale(0);
+  transform-origin: bottom left;
+}
+
+.checkbox__input {
+  display: grid;
+  grid-template-areas: "checkbox";
+  place-items: center;
+}
+.checkbox__input > * {
+  grid-area: checkbox;
+}
+.checkbox__input input {
+  opacity: 0;
+  width: 1em;
+  height: 1em;
+}
+.checkbox__input input:active + .checkbox__control {
+  box-shadow: 0 0 0 0.05em #a287ff, 0 0 0.15em 0.1em currentColor;
+}
+.checkbox__input input:checked + .checkbox__control svg {
+  transform: scale(1);
 }
 
 .container__sort {

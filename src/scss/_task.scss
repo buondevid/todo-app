@@ -1,0 +1,149 @@
+@use 'setup' as *;
+
+.container__tasks {
+	grid-area: tasks;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	height: 70rem;
+	width: 100%;
+	margin: auto;
+	padding: 3rem;
+	overflow-y: scroll;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+
+	&::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera */
+	}
+}
+
+.task {
+	padding: 1rem 2rem;
+	margin: 0.5rem;
+	border-radius: 1rem;
+	width: 100%;
+	height: 7rem;
+	/* max-height to transition the task div */
+	overflow-y: hidden;
+	color: rgb(198, 184, 248);
+	border-left: 0.2rem solid red;
+	background-color: rgb(26, 27, 30);
+	box-shadow: rgb(21, 21, 24) 0.3rem 0.3rem 0.6rem 0px inset,
+		rgb(36, 37, 41) -0.3rem -0.3rem 0.6rem 0px inset;
+	-webkit-box-shadow: rgb(21, 21, 24) 0.3rem 0.6rem 0.3rem 0.2rem inset,
+		rgb(64, 65, 71) -0.3rem -0.3rem 0.6rem 0.2rem inset;
+	transition: height 0.5s ease-out;
+	flex-shrink: 0;
+
+	input,
+	textarea,
+	select {
+		margin: 1rem;
+		border-radius: 0.5rem;
+		background: transparent;
+		outline: 0;
+		border: 0.01rem solid grey;
+		cursor: pointer;
+		font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+			Ubuntu, Cantarell, 'Open Sans', sans-serif;
+	}
+
+		input[type='text'] {
+		width: 90%;
+		padding-left: 0.7rem;
+		border-style: none;
+
+		&::placeholder {
+			color: rgb(198, 184, 248);
+		}
+	}
+
+//had to increase specifity to override rules
+	#{&}_edit-active[class] {
+	border: 0.2rem solid rgb(162, 135, 255);
+	}
+
+	input[type='checkbox'] {
+		width: 2rem;
+		height: 2rem;
+		vertical-align: baseline;
+	}
+
+	select {
+		min-width: 25%;
+		padding: 0 0.2rem;
+
+		option {
+			background-color: $purple;
+		}
+
+		&:disabled {
+			border: 0.01rem solid grey;
+		}
+	}
+
+	input[type='date'] {
+		padding: 0 1rem;
+
+		&::-webkit-calendar-picker-indicator {
+			cursor: pointer;
+			border-radius: 4px;
+			margin-right: 2px;
+			opacity: 0.6;
+			filter: invert(0.7);
+		}
+
+		&::-webkit-calendar-picker-indicator:hover {
+			opacity: 1;
+		}
+	}
+
+	textarea {
+		width: 96.5%;
+		height: 15rem;
+		padding-left: 0.5rem;
+
+		&::placeholder {
+			color: rgb(198, 184, 248);
+		}
+	}
+
+	&__first-line {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&_normal {
+		border-left: 0.4rem solid red;
+	}
+
+	&_medium {
+		border-left: 0.4rem solid rgb(255, 196, 0);
+	}
+
+	&_urgent {
+		border-left: 0.4rem solid green;
+	}
+
+	&__edit {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		a {
+			margin: 0 2rem 0.5rem;
+			font-size: 2.5rem;
+
+			&:first-child {
+				font-size: 2.65rem;
+			}
+
+			&:hover {
+				opacity: 0.8;
+			}
+		}
+	}
+}

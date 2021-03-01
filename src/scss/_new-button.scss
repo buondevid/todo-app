@@ -1,0 +1,37 @@
+@use 'sass:color';
+@use 'setup' as *;
+
+.new-button {
+	background-color: $purple;
+	border: 0;
+	box-shadow: rgb(120, 99, 196) 2px 2px 4px 3px, rgb(162, 135, 255) -2px -2px 4px 3px;
+	border-radius: 50%;
+	position: absolute;
+	top: 5%;
+	left: 5%;
+	width: 7rem;
+	height: 7rem;
+	outline: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: transform 0.3s ease-out;
+
+	i {
+		transition: transform 0.5s ease-out;
+	}
+
+	&:active {
+		box-shadow: rgb(162, 135, 255) 1px 1px 1px 1px, rgb(162, 135, 255) -1px -1px 1px 1px;
+		background-color: color.scale($purple, $lightness: 2%);
+		transform: scale(0.97);
+	}
+
+	&:active i {
+		color: color.scale(black, $lightness: 20%);
+	}
+
+	&:hover i {
+		transform: rotate(180deg);
+	}
+}

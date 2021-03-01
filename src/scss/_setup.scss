@@ -1,0 +1,49 @@
+$purple: #8d75e6;
+$yellow: #9e1c1c;
+$orange: #d65108;
+@use 'sass:color';
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+	/* height: -webkit-fill-available;  to make 100vh look good on mobile*/
+}
+
+body {
+	height: 100vh;
+	/* min-height: -webkit-fill-available; to make 100vh look good on mobile*/
+	line-height: 1.5;
+	font-size: 2rem;
+	background-color: $purple;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+img,
+picture {
+	max-width: 100%;
+	display: block;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+	color: inherit;
+	letter-spacing: inherit;
+	cursor: pointer;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}

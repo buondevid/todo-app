@@ -1,0 +1,35 @@
+@use 'sass:color';
+@use 'setup' as *;
+
+.container {
+	display: grid;
+	justify-items: center;
+	align-content: space-around;
+	grid-template: 1fr / 0.7fr 2px 2fr 2px 0.5fr;
+	grid-template-areas: 'projects border1 tasks border2 sort';
+	background-color: $purple;
+	box-shadow: rgb(120, 99, 196) 6px 6px 12px 0px inset, rgb(162, 135, 255) -6px -6px 12px 0px inset;
+	-webkit-box-shadow: rgb(120, 99, 196) 6px 6px 12px 0px inset,
+		rgb(162, 135, 255) -6px -6px 12px 0px inset;
+	border-radius: 15rem;
+	-webkit-border-radius: 15rem;
+	max-width: 110rem;
+	width: 80%;
+	height: 80%;
+}
+
+.container__border1 {
+	grid-area: border1;
+	height: 30%;
+	width: 100%;
+	margin: auto;
+	background-color: rgb(162, 135, 255);
+}
+
+.container__border2 {
+	grid-area: border2;
+	height: 30%;
+	width: 100%;
+	margin: auto;
+	background-color: rgb(162, 135, 255);
+}
