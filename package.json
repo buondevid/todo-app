@@ -1,0 +1,26 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "description": "A TODO app to help you remember your tasks!",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buondevid/todo-app.git"
+  },
+  "author": "Davide Briano <davidebriano@gmail.com> (https://github.com/buondevid)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/buondevid/todo-app/issues"
+  },
+  "homepage": "https://github.com/buondevid/todo-app#readme",
+  "devDependencies": {
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "webpack": "^5.24.2",
+    "webpack-cli": "^4.5.0"
+  }
+}
