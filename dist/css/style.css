@@ -1,0 +1,281 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  /* height: -webkit-fill-available;  to make 100vh look good on mobile*/
+}
+
+body {
+  height: 100vh;
+  /* min-height: -webkit-fill-available; to make 100vh look good on mobile*/
+  line-height: 1.5;
+  font-size: 2rem;
+  background-color: #8d75e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+.new-button {
+  background-color: #8d75e6;
+  border: 0;
+  box-shadow: #7863c4 2px 2px 4px 3px, #a287ff -2px -2px 4px 3px;
+  border-radius: 50%;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 7rem;
+  height: 7rem;
+  outline: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease-out;
+}
+.new-button i {
+  transition: transform 0.5s ease-out;
+}
+.new-button:active {
+  box-shadow: #a287ff 1px 1px 1px 1px, #a287ff -1px -1px 1px 1px;
+  background-color: #8f78e7;
+  transform: scale(0.97);
+}
+.new-button:active i {
+  color: #333333;
+}
+.new-button:hover i {
+  transform: rotate(180deg);
+}
+
+.container {
+  display: grid;
+  justify-items: center;
+  align-content: space-around;
+  grid-template: 1fr/1fr 2px 2fr 2px 0.5fr;
+  grid-template-areas: "projects border1 tasks border2 sort";
+  background-color: #8d75e6;
+  box-shadow: #7863c4 6px 6px 12px 0px inset, #a287ff -6px -6px 12px 0px inset;
+  -webkit-box-shadow: #7863c4 6px 6px 12px 0px inset, #a287ff -6px -6px 12px 0px inset;
+  border-radius: 15rem;
+  -webkit-border-radius: 15rem;
+  max-width: 110rem;
+  width: 80%;
+  height: 80%;
+}
+
+.container__project {
+  grid-area: projects;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 90%;
+  margin: auto;
+  padding: 2rem;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+.container__project::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+}
+
+.project {
+  padding: 1rem 2rem;
+  margin: 2rem 0;
+  width: 100%;
+  max-width: 30rem;
+  background-color: inherit;
+  border: 0;
+  outline: 0;
+  text-align: center;
+  font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
+  box-shadow: #7863c4 4px 4px 6px 0px, #a287ff -4px -4px 6px 0px;
+  -webkit-box-shadow: #7863c4 4px 4px 6px 0px, #a287ff -4px -4px 6px 0px;
+  border-radius: 20rem;
+  -webkit-border-radius: 20rem;
+  transition: transform 0.3s ease;
+}
+.project:active {
+  box-shadow: #a287ff 2px 2px 4px 0px, #7863c4 -2px -2px 4px 0px;
+  -webkit-box-shadow: #a287ff 2px 2px 4px 0px, #7863c4 -2px -2px -4px 0px;
+}
+.project:focus {
+  color: white;
+  background: linear-gradient(to bottom right, #f87f3d, #d65108);
+}
+.project_active {
+  color: white;
+  background-color: #d65108;
+}
+.project:hover {
+  transform: scale(1.2);
+}
+
+.container__tasks {
+  grid-area: tasks;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 90%;
+  width: 100%;
+  margin: auto;
+  padding: 3rem;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+.container__tasks::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+}
+
+.task {
+  padding: 1rem 2rem;
+  margin: 0.5rem;
+  box-shadow: #7863c4 6px 6px 12px 0px inset, #a287ff -6px -6px 12px 0px inset;
+  -webkit-box-shadow: #7863c4 6px 6px 12px 0px inset, #a287ff -6px -6px 12px 0px inset;
+  border-radius: 1rem;
+  width: 100%;
+  color: #c6b8f8;
+  border-left: 0.2rem solid red;
+}
+.task input, .task textarea, .task select {
+  margin: 1rem;
+  border: 0.2rem solid #a287ff;
+  border-radius: 0.5rem;
+  background: transparent;
+  outline: 0;
+  cursor: pointer;
+  font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
+}
+.task input[type=text] {
+  width: 90%;
+  padding-left: 0.7rem;
+}
+.task input[type=text]::-moz-placeholder {
+  color: #c6b8f8;
+}
+.task input[type=text]:-ms-input-placeholder {
+  color: #c6b8f8;
+}
+.task input[type=text]::placeholder {
+  color: #c6b8f8;
+}
+.task input[type=checkbox] {
+  width: 2rem;
+  height: 2rem;
+  vertical-align: baseline;
+}
+.task select {
+  min-width: 25%;
+  padding: 0 0.2rem;
+}
+.task select option {
+  background-color: #8d75e6;
+}
+.task input[type=date] {
+  padding: 0 1rem;
+}
+.task textarea {
+  width: 96.5%;
+  height: 15rem;
+  padding-left: 0.6rem;
+}
+.task textarea::-moz-placeholder {
+  color: #c6b8f8;
+}
+.task textarea:-ms-input-placeholder {
+  color: #c6b8f8;
+}
+.task textarea::placeholder {
+  color: #c6b8f8;
+}
+.task__first-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.task_normal {
+  border-left: 0.3rem solid red;
+}
+.task_medium {
+  border-left: 0.3rem solid #ffc400;
+}
+.task_urgent {
+  border-left: 0.3rem solid green;
+}
+
+.container__border1 {
+  grid-area: border1;
+  height: 80%;
+  width: 100%;
+  margin: auto;
+  background-color: #a287ff;
+}
+
+.container__border2 {
+  grid-area: border2;
+  height: 80%;
+  width: 100%;
+  margin: auto;
+  background-color: #a287ff;
+}
+
+.container__sort {
+  grid-area: sort;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.container__sort button {
+  width: 4rem;
+  height: 4rem;
+  text-align: center;
+  line-height: 4rem;
+  outline: 0;
+  border: 0;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: #7863c4 0.3rem 0.3rem 4px 1px, #a287ff -0.3rem -0.3rem 4px 1px;
+  transition: transform 0.3s ease;
+}
+.container__sort button:active {
+  box-shadow: #a287ff 1px 1px 1px 1px, #a287ff -1px -1px 1px 1px;
+  background-color: #8f78e7;
+}
+.container__sort button:hover {
+  transform: scale(1.2);
+}
+.container__sort button:focus {
+  color: white;
+  background: linear-gradient(to bottom right, #f99158, #d65108);
+}/*# sourceMappingURL=style.css.map */

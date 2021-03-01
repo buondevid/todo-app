@@ -1,0 +1,300 @@
+@use 'sass:color';
+
+$purple: #8d75e6;
+$yellow: #9e1c1c;
+$orange: #d65108;
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+	/* height: -webkit-fill-available;  to make 100vh look good on mobile*/
+}
+
+body {
+	height: 100vh;
+	/* min-height: -webkit-fill-available; to make 100vh look good on mobile*/
+	line-height: 1.5;
+	font-size: 2rem;
+	background-color: $purple;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+img,
+picture {
+	max-width: 100%;
+	display: block;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+	color: inherit;
+	letter-spacing: inherit;
+}
+
+.new-button {
+	background-color: $purple;
+	border: 0;
+	box-shadow: rgb(120, 99, 196) 2px 2px 4px 3px, rgb(162, 135, 255) -2px -2px 4px 3px;
+	border-radius: 50%;
+	position: absolute;
+	top: 5%;
+	left: 5%;
+	width: 7rem;
+	height: 7rem;
+	outline: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: transform 0.3s ease-out;
+
+	i {
+		transition: transform 0.5s ease-out;
+	}
+
+	&:active {
+		box-shadow: rgb(162, 135, 255) 1px 1px 1px 1px, rgb(162, 135, 255) -1px -1px 1px 1px;
+		background-color: color.scale($purple, $lightness: 2%);
+		transform: scale(0.97);
+	}
+
+	&:active i {
+		color: color.scale(black, $lightness: 20%);
+	}
+
+	&:hover i{
+		transform: rotate(180deg);
+	}
+}
+
+.container {
+	display: grid;
+	justify-items: center;
+	align-content: space-around;
+	grid-template: 1fr / 1fr 2px 2fr 2px 0.5fr;
+	grid-template-areas: 'projects border1 tasks border2 sort';
+	background-color: $purple;
+	box-shadow: rgb(120, 99, 196) 6px 6px 12px 0px inset, rgb(162, 135, 255) -6px -6px 12px 0px inset;
+	-webkit-box-shadow: rgb(120, 99, 196) 6px 6px 12px 0px inset,
+		rgb(162, 135, 255) -6px -6px 12px 0px inset;
+	border-radius: 15rem;
+	-webkit-border-radius: 15rem;
+	max-width: 110rem;
+	width: 80%;
+	height: 80%;
+}
+
+.container__project {
+	grid-area: projects;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	height: 90%;
+	margin: auto;
+	padding: 2rem;
+	overflow-y: scroll;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+
+	&::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera */
+	}
+}
+
+.project {
+	padding: 1rem 2rem;
+	margin: 2rem 0;
+	width: 100%;
+	max-width: 30rem;
+	background-color: inherit;
+	border: 0;
+	outline: 0;
+	text-align: center;
+	font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+		Ubuntu, Cantarell, 'Open Sans', sans-serif;
+	box-shadow: rgb(120, 99, 196) 4px 4px 6px 0px, rgb(162, 135, 255) -4px -4px 6px 0px;
+	-webkit-box-shadow: rgb(120, 99, 196) 4px 4px 6px 0px, rgb(162, 135, 255) -4px -4px 6px 0px;
+	border-radius: 20rem;
+	-webkit-border-radius: 20rem;
+	transition: transform 0.3s ease;
+
+	&:active {
+		box-shadow: rgb(162, 135, 255) 2px 2px 4px 0px, rgb(120, 99, 196) -2px -2px 4px 0px;
+		-webkit-box-shadow: rgb(162, 135, 255) 2px 2px 4px 0px, rgb(120, 99, 196) -2px -2px -4px 0px;
+	}
+
+	&:focus {
+		color: white;
+		background: linear-gradient(to bottom right,color.scale($orange, $lightness: 30%), $orange);
+	}
+
+	&_active {
+		color: white;
+		background-color: $orange;
+	}
+
+	&:hover {
+		transform: scale(1.2);
+	}
+}
+
+.container__tasks {
+	grid-area: tasks;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	height: 90%;
+	width: 100%;
+	margin: auto;
+	padding: 3rem;
+	overflow-y: scroll;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+
+	&::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera */
+	}
+}
+
+.task {
+	padding: 1rem 2rem;
+	margin: 0.5rem;
+	box-shadow: rgb(120, 99, 196) 6px 6px 12px 0px inset, rgb(162, 135, 255) -6px -6px 12px 0px inset;
+	-webkit-box-shadow: rgb(120, 99, 196) 6px 6px 12px 0px inset, rgb(162, 135, 255) -6px -6px 12px 0px inset;
+	border-radius: 1rem;
+	width: 100%;
+	// height: 7rem;
+	// overflow-y: hidden;
+	color: rgb(198, 184, 248);
+	border-left: 0.2rem solid red;
+
+	input, textarea, select {
+		margin: 1rem;
+		border: 0.2rem solid rgb(162, 135, 255);
+		border-radius: 0.5rem;
+		background: transparent;
+		outline: 0;
+		cursor: pointer;
+		font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+	}
+
+	input[type='text'] {
+		width: 90%;
+		padding-left: 0.7rem;
+
+		&::placeholder{
+			color:rgb(198, 184, 248);
+		}
+	}
+
+	input[type='checkbox'] {
+		width: 2rem;
+		height: 2rem;
+		vertical-align: baseline;
+	}
+
+	select {
+		min-width: 25%;
+		padding: 0 0.2rem;
+
+		option {
+			background-color: $purple;
+		}
+	}
+
+	input[type='date'] {
+		padding: 0 1rem;
+	}
+
+	textarea {
+		width: 96.5%;
+		height: 15rem;
+		padding-left: 0.6rem;
+
+		&::placeholder{
+			color:rgb(198, 184, 248);
+		}
+	}
+
+	&__first-line{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&_normal {
+		border-left: 0.3rem solid red;
+	}
+
+	&_medium {
+		border-left: 0.3rem solid rgb(255, 196, 0);
+	}
+
+	&_urgent {
+		border-left: 0.3rem solid green;
+	}
+}
+
+.container__border1 {
+	grid-area: border1;
+	height: 80%;
+	width: 100%;
+	margin: auto;
+	background-color: rgb(162, 135, 255);
+}
+
+.container__border2 {
+	grid-area: border2;
+	height: 80%;
+	width: 100%;
+	margin: auto;
+	background-color: rgb(162, 135, 255);
+}
+
+.container__sort {
+	grid-area: sort;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+
+	button {
+		width: 4rem;
+		height: 4rem;
+		text-align: center;
+		line-height: 4rem;
+		outline: 0;
+		border: 0;
+		background-color: transparent;
+		border-radius: 50%;
+		box-shadow: rgb(120, 99, 196) 0.3rem 0.3rem 4px 1px, rgb(162, 135, 255) -0.3rem -0.3rem 4px 1px;
+		transition: transform 0.3s ease;
+
+		&:active {
+			box-shadow: rgb(162, 135, 255) 1px 1px 1px 1px, rgb(162, 135, 255) -1px -1px 1px 1px;
+			background-color: color.scale($purple, $lightness: 2%);
+		}
+
+		&:hover {
+			transform: scale(1.2);
+		}
+
+		&:focus {
+			color: white;
+			background: linear-gradient(to bottom right,color.scale($orange, $lightness: 40%), $orange);
+		}
+	}
+}

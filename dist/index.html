@@ -5,12 +5,55 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://kit.fontawesome.com/d6b9dc58a2.js" crossorigin="anonymous"></script>
 	<meta name="description" content="A light app to keep track of your TODOs">
 	<title>Todo App</title>
 </head>
 
 <body>
+	<button class="new-button" type="button"><i class="fas fa-plus fa-2x"></i></button>
+
+	<main class="container">
+		<div class="container__project">
+			<button class="project">ALL</button>
+			<button class="project">FINANCE</button>
+			<button class="project">GROCERY</button>
+			<button class="project">ALL</button>
+			<button class="project">FINANCE</button>
+		</div>
+
+		<div class="container__border1"></div>
+
+		<div class="container__tasks">
+			<div class="task">
+				<div class="task__first-line">
+				<input type="text" placeholder="> Title">
+				<input type="checkbox">
+			</div>
+				<select>
+					<option selected disabled>> Priority</option>
+					<option>Normal</option>
+					<option>Timely</option>
+					<option>Urgent</option>
+				</select>
+				<input type="date">
+				<textarea id="w3review" placeholder="> Description"></textarea>
+				
+			</div>
+			<div class="task task_normal">Be Awesome</div>
+			<div class="task task_medium">Study for the test</div>
+			<div class="task task_urgent">Apply for those jobs</div>
+		</div>
+
+		<div class="container__border2"></div>
+
+		<div class="container__sort">
+			<button class="far fa-calendar-alt"></button>
+			<button class="fas fa-exclamation"></button>
+			<button class="fas fa-sort-alpha-down"></button>
+		</div>
+	</main>
 
 	<script src="main.js"></script>
 </body>
