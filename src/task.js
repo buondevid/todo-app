@@ -1,3 +1,5 @@
+import { createTask, taskArr } from './objects';
+
 /* eslint-disable no-restricted-syntax */
 const tasks = document.getElementsByClassName('task');
 const taskContainer = document.getElementsByClassName('container__tasks')[0];
@@ -50,6 +52,8 @@ function stopEdit(e) {
 			inp.setAttribute('readonly', '');
 			inp.classList.remove('task_edit-active');
 		}
+
+		createTask(e);
 	}
 }
 
@@ -98,14 +102,12 @@ function taskDOMCreator() {
 				<div class="task__edit">
 					<a href="#"><i class="far fa-check-circle"></i></a>
 					<a href="#"><i class="far fa-edit"></i></a>
-				</div>
-`;
+				</div>`;
 	taskContainer.appendChild(task);
 
 	const inputCheckbox = task.querySelector('input[type="checkbox"]');
 	const input1 = task.getElementsByTagName('input')[0];
 	const select = task.querySelector('select');
-	console.log(select);
 
 	input1.addEventListener('click', taskOpener.bind(task)); // open modal
 
@@ -116,6 +118,7 @@ function taskDOMCreator() {
 		else inputCheckbox.closest('.task').classList.remove('task_erasing');
 		deleteTimeout = setTimeout(() => {
 			inputCheckbox.checked && inputCheckbox.closest('.task').remove(); // delete task because it's done
+			taskArr.splice(taskArr.findIndex((item) => item.id !== task.dataset.key), 1); // find and delete object
 		},
 		3000);
 	});
