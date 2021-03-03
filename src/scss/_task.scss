@@ -6,10 +6,9 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	height: 70rem;
+	height: 90%;
 	width: 100%;
 	margin: auto;
-	padding: 3rem;
 	overflow-y: scroll;
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
@@ -28,7 +27,6 @@
 	/* max-height to transition the task div */
 	overflow-y: hidden;
 	color: rgb(198, 184, 248);
-	border-left: 0.2rem solid red;
 	background-color: rgb(26, 27, 30);
 	box-shadow: rgb(21, 21, 24) 0.3rem 0.3rem 0.6rem 0px inset,
 		rgb(36, 37, 41) -0.3rem -0.3rem 0.6rem 0px inset;
@@ -62,7 +60,7 @@
 
 //had to increase specifity to override rules
 	#{&}_edit-active[class] {
-	border: 0.2rem solid rgb(162, 135, 255);
+	outline: 0.2rem solid rgb(162, 135, 255);
 	}
 
 	input[type='checkbox'] {
@@ -73,7 +71,9 @@
 
 	select {
 		min-width: 25%;
-		padding: 0 0.2rem;
+		padding: 0.35rem 0.2rem;
+		position:relative;
+		bottom:-0.1rem;
 
 		option {
 			background-color: $purple;
@@ -117,7 +117,7 @@
 	}
 
 	&_normal {
-		border-left: 0.4rem solid red;
+		border-left: 0.4rem solid green;
 	}
 
 	&_medium {
@@ -125,7 +125,11 @@
 	}
 
 	&_urgent {
-		border-left: 0.4rem solid green;
+		border-left: 0.4rem solid red;
+	}
+
+	&_erasing {
+		animation: goodbye 1s infinite;
 	}
 
 	&__edit {
@@ -145,5 +149,16 @@
 				opacity: 0.8;
 			}
 		}
+	}
+}
+
+@keyframes goodbye {
+	0%,
+	100% {
+		background-color: rgba(255,0,0,0.2);
+		box-shadow: none;
+	}
+	50% {
+		background-color: initial;
 	}
 }

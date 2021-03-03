@@ -3,18 +3,21 @@ const tasks = document.getElementsByClassName('task');
 const taskContainer = document.getElementsByClassName('container__tasks')[0];
 const newButton = document.getElementsByClassName('new-button')[0];
 
+// makes task full size
 function taskOpener() {
 	if ((this.style.maxHeight === '' || this.style.maxHeight === '7rem')) {
 		this.style.height = '35rem';
 	}
 }
 
+// minify task
 function minifyTask(e) {
 	if (e.target.classList.contains('fa-check-circle')) {
 		e.target.closest('.task').style.height = '';
 	}
 }
 
+// put task in edit mode
 function editTask(e) {
 	if (e.target.classList.contains('fa-edit')) {
 		const container = e.target.closest('.task');
@@ -32,6 +35,7 @@ function editTask(e) {
 	}
 }
 
+// put task in readonly mode
 function stopEdit(e) {
 	if (e.target.classList.contains('fa-check-circle')) {
 		const container = e.target.closest('.task');
@@ -49,21 +53,21 @@ function stopEdit(e) {
 	}
 }
 
-// function setColorPriority(task) {
-// 	const a = document.querySelector(`.${task.className} select`);
-// 	switch (a.value) {
-// 	case 'Normal':
-// 		task.classList.add('task_normal');
-// 		break;
-// 	case 'Timely':
-// 		task.classList.add('task_medium');
-// 		break;
-// 	case 'Urgent':
-// 		task.classList.add('task_urgent');
-// 		break;
-// 	default:
-// 	}
-// }
+function setColorPriority() {
+	this.parentElement.className = 'task';
+	switch (this.value) {
+	case 'Normal':
+		this.parentElement.classList.add('task_normal');
+		break;
+	case 'Timely':
+		this.parentElement.classList.add('task_medium');
+		break;
+	case 'Urgent':
+		this.parentElement.classList.add('task_urgent');
+		break;
+	default:
+	}
+}
 
 function taskDOMCreator() {
 	const task = document.createElement('div');
@@ -97,22 +101,33 @@ function taskDOMCreator() {
 				</div>
 `;
 	taskContainer.appendChild(task);
-	const inputCheckbox = taskContainer.lastChild.querySelector('input[type="checkbox"]');
-	const input1 = taskContainer.lastChild.getElementsByTagName('input')[0];
-	input1.addEventListener('click', taskOpener.bind(taskContainer.lastChild)); // open modal
+
+	const inputCheckbox = task.querySelector('input[type="checkbox"]');
+	const input1 = task.getElementsByTagName('input')[0];
+	const select = task.querySelector('select');
+	console.log(select);
+
+	input1.addEventListener('click', taskOpener.bind(task)); // open modal
+
+	let deleteTimeout; // to reset timeout when changing mind about delete
 	inputCheckbox.addEventListener('change', () => {
-		setTimeout(() => {
+		clearTimeout(deleteTimeout);
+		if (inputCheckbox.checked === true) inputCheckbox.closest('.task').classList.add('task_erasing');
+		else inputCheckbox.closest('.task').classList.remove('task_erasing');
+		deleteTimeout = setTimeout(() => {
 			inputCheckbox.checked && inputCheckbox.closest('.task').remove(); // delete task because it's done
 		},
 		3000);
 	});
+
+	select.addEventListener('change', setColorPriority);
 }
 
+// module to attach event listeners at DOMload
 (function a() {
 	taskDOMCreator();
 
 	for (const task of tasks) {
-		console.log(task.querySelector('input'));
 		task.querySelector('input').addEventListener('click', taskOpener.bind(task));
 	}
 	// icon Save to reduce the task window
