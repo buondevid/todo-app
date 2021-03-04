@@ -112,7 +112,7 @@ a {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 90%;
+  height: 80%;
   margin: auto;
   padding: 2rem;
   overflow-y: scroll;
@@ -186,7 +186,7 @@ a {
   background-color: #1a1b1e;
   box-shadow: #151518 0.3rem 0.3rem 0.6rem 0px inset, #242529 -0.3rem -0.3rem 0.6rem 0px inset;
   -webkit-box-shadow: #151518 0.3rem 0.6rem 0.3rem 0.2rem inset, #404147 -0.3rem -0.3rem 0.6rem 0.2rem inset;
-  transition: height 0.5s ease-out;
+  transition: height 0.5s ease-out, opacity 0.5s ease-out;
   flex-shrink: 0;
 }
 .task input,
@@ -261,6 +261,10 @@ a {
 .task textarea::placeholder {
   color: #c6b8f8;
 }
+.task > input:last-of-type {
+  border: 0.01rem solid grey;
+  width: 15rem;
+}
 .task__first-line {
   display: flex;
   justify-content: space-between;
@@ -280,7 +284,7 @@ a {
           animation: goodbye 1s infinite;
 }
 .task__edit {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
 }
@@ -293,6 +297,9 @@ a {
 }
 .task__edit a:hover {
   opacity: 0.8;
+}
+.task_fading {
+  opacity: 0;
 }
 
 @-webkit-keyframes goodbye {
