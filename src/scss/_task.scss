@@ -32,7 +32,7 @@
 		rgb(36, 37, 41) -0.3rem -0.3rem 0.6rem 0px inset;
 	-webkit-box-shadow: rgb(21, 21, 24) 0.3rem 0.6rem 0.3rem 0.2rem inset,
 		rgb(64, 65, 71) -0.3rem -0.3rem 0.6rem 0.2rem inset;
-	transition: height 0.5s ease-out;
+	transition: height 0.5s ease-out, opacity 0.5s ease-out;
 	flex-shrink: 0;
 
 	input,
@@ -110,6 +110,11 @@
 		}
 	}
 
+	> input:last-of-type {
+		border: 0.01rem solid grey;
+		width: 15rem;
+	}
+
 	&__first-line {
 		display: flex;
 		justify-content: space-between;
@@ -133,7 +138,7 @@
 	}
 
 	&__edit {
-		display: flex;
+		display: inline-flex;
 		justify-content: center;
 		align-items: center;
 
@@ -149,6 +154,10 @@
 				opacity: 0.8;
 			}
 		}
+	}
+
+	&_fading {
+		opacity: 0;
 	}
 }
 
