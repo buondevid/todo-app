@@ -1,3 +1,5 @@
+import { renderTasks, taskArr } from './objects';
+
 export const arrProjects = ['ALL', 'FINANCE', 'GROCERY'];
 
 export function addProjectToArr(string) {
@@ -17,4 +19,9 @@ export function renderProjects() {
 		button.innerText = element;
 		container.appendChild(button);
 	});
+}
+
+export function filterProjectTasks(string) {
+	const filteredArray = taskArr.filter((item) => string === item.project);
+	renderTasks(filteredArray);
 }

@@ -2,26 +2,24 @@ import { createTask, taskArr } from './objects';
 import { arrProjects, renderProjects } from './projects';
 
 /* eslint-disable no-restricted-syntax */
-const tasks = document.getElementsByClassName('task');
 const taskContainer = document.getElementsByClassName('container__tasks')[0];
-const newButton = document.getElementsByClassName('new-button')[0];
 
 // makes task full size
-function taskOpener() {
+export function taskOpener() {
 	if ((this.style.maxHeight === '' || this.style.maxHeight === '7rem')) {
 		this.style.height = '35rem';
 	}
 }
 
 // minify task
-function minifyTask(e) {
+export function minifyTask(e) {
 	if (e.target.classList.contains('fa-check-circle')) {
 		e.target.closest('.task').style.height = '';
 	}
 }
 
 // put task in edit mode
-function editTask(e) {
+export function editTask(e) {
 	if (e.target.classList.contains('fa-edit')) {
 		const container = e.target.closest('.task');
 		const textInput = container.querySelector('input[type="text"]');
@@ -39,8 +37,21 @@ function editTask(e) {
 	}
 }
 
+// CREATE or UPDATE projects html and arrayProjects
+const updateProjects = (e) => {
+	if (e.target.classList.contains('fa-check-circle')) {
+		const task = e.target.closest('.task');
+		const textInput2 = task.querySelectorAll('input[type="text"]')[1];
+		const tag = textInput2.value.toUpperCase() || 'ALL';
+		if (!arrProjects.includes(tag)) {
+			arrProjects.push(tag);
+			renderProjects();
+		}
+	}
+};
+
 // put task in readonly mode
-function stopEdit(e) {
+export function stopEdit(e) {
 	if (e.target.classList.contains('fa-check-circle')) {
 		const container = e.target.closest('.task');
 		const textInput = container.querySelector('input[type="text"]');
@@ -61,21 +72,9 @@ function stopEdit(e) {
 	}
 }
 
-// CREATE or UPDATE projects html and arrayProjects
-const updateProjects = (e) => {
-	if (e.target.classList.contains('fa-check-circle')) {
-		const task = e.target.closest('.task');
-		const textInput2 = task.querySelectorAll('input[type="text"]')[1];
-		const tag = textInput2.value.toUpperCase() || 'ALL';
-		if (!arrProjects.includes(tag)) {
-			arrProjects.push(tag);
-			renderProjects();
-		}
-	}
-};
-
-function setColorPriority() {
-	this.parentElement.className = 'task';
+export function setColorPriority() {
+	console.log(this);
+	// this.parentElement.className = 'task';
 	switch (this.value) {
 	case 'Normal':
 		this.parentElement.classList.add('task_normal');
@@ -90,7 +89,18 @@ function setColorPriority() {
 	}
 }
 
-function taskDOMCreator() {
+export function deleteTask(input, varTimeout, task) {
+	clearTimeout(varTimeout);
+	if (input.checked === true) input.closest('.task').classList.add('task_erasing');
+	else input.closest('.task').classList.remove('task_erasing');
+	varTimeout = setTimeout(() => {
+		input.checked && input.closest('.task').remove(); // delete task because it's done
+		taskArr.splice(taskArr.findIndex((item) => item.id !== task.dataset.key), 1); // find and delete object in array
+	},
+	3000);
+}
+
+export function taskDOMCreator() {
 	const task = document.createElement('div');
 	task.classList.add('task', 'task_fading');
 	task.setAttribute('data-key', Date.now());
@@ -122,57 +132,20 @@ function taskDOMCreator() {
 					<a href="#"><i class="far fa-check-circle"></i></a>
 					<a href="#"><i class="far fa-edit"></i></a>
 				</div>`;
- // fade in trasnition task rendered
 
-	const inputCheckbox = task.querySelector('input[type="checkbox"]');
+	const input = task.querySelector('input[type="checkbox"]');
 	const input1 = task.getElementsByTagName('input')[0];
 	const select = task.querySelector('select');
 
 	input1.addEventListener('click', taskOpener.bind(task)); // open modal
-
-	// DELETE object from screen and array
-	let deleteTimeout; // to reset timeout when changing mind about delete
-	inputCheckbox.addEventListener('change', () => {
-		clearTimeout(deleteTimeout);
-		if (inputCheckbox.checked === true) inputCheckbox.closest('.task').classList.add('task_erasing');
-		else inputCheckbox.closest('.task').classList.remove('task_erasing');
-		deleteTimeout = setTimeout(() => {
-			inputCheckbox.checked && inputCheckbox.closest('.task').remove(); // delete task because it's done
-			taskArr.splice(taskArr.findIndex((item) => item.id !== task.dataset.key), 1); // find and delete object in array
-		},
-		3000);
-	});
-
-	// CREATE project tag
-	// const textInput2 = task.querySelectorAll('input[type="text"]')[1];
-	// textInput2.addEventListener('change', () => {
-	// 	const tag = textInput2.value.toLowerCase();
-	// 	if (arrProjects.findIndex((item) => item.project === tag) > -1) {
-	// 		const index = arrProjects.findIndex((item) => item.project === tag);
-	// 		arrProjects[index] = task;
-	// 	} else {arrProjects.push(textInput2.value); }
-	// 	renderProjects();
-	// });
-
 	select.addEventListener('change', setColorPriority);
 
+	let deleteTimeout; // to reset timeout when changing mind about delete
+	input.addEventListener('change', deleteTask.bind(null, input, deleteTimeout, task));
+
 	taskContainer.prepend(task);
+	// fade in transition task rendered
 	setTimeout(() => task.classList.remove('task_fading'), 100);
 
 	console.log(taskArr);
 }
-
-// module to attach event listeners at DOMload
-(function a() {
-	taskDOMCreator();
-	renderProjects();
-
-	// icon Save to reduce the task window & stop Edit when you confirm
-	// icon Edit to edit the task window
-	taskContainer.addEventListener('click', (e) => {
-		minifyTask(e);
-		editTask(e);
-		stopEdit(e);
-	});
-	newButton.addEventListener('click', taskDOMCreator); // create a new task
-}());

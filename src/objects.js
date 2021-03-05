@@ -1,4 +1,5 @@
-import { arrProjects, renderProjects } from './projects';
+// import { arrProjects, renderProjects } from './projects';
+import { taskOpener, setColorPriority, deleteTask } from './task';
 
 export const taskArr = [];
 
@@ -54,12 +55,15 @@ export function createTask(e) {
 	// });
 }
 
-export function renderTask(obj) {
+export function renderTasks(array) {
 	const taskContainer = document.querySelector('.container__tasks');
-	const task = document.createElement('div');
-	task.classList.add('task', 'task_fading');
+	taskContainer.innerHTML = '';
 
-	task.innerHTML = `
+	array.forEach((item) => {
+		const task = document.createElement('div');
+		task.classList.add('task', 'task_fading');
+
+		task.innerHTML = `
 				<div class="task__first-line">
 				<input readonly type="text" placeholder="> Title">
 				<label class="checkbox">
@@ -87,22 +91,32 @@ export function renderTask(obj) {
 				<a href="#"><i class="far fa-check-circle"></i></a>
 				<a href="#"><i class="far fa-edit"></i></a>
 			</div>`;
-	taskContainer.prepend(task);
-	setTimeout(() => task.classList.remove('task_fading'), 100);
 
-	const title = task.querySelector('input');
-	const priority = task.querySelector('select');
-	const date = task.querySelector('input[type="date"]');
-	const description = task.querySelector('textarea');
-	const project = task.querySelectorAll('[type="text"]')[1];
-	const checked = task.querySelector("[type='checkbox']");
-	const id = task.dataset;
+		const title = task.querySelector('input');
+		const priority = task.querySelector('select');
+		const date = task.querySelector('input[type="date"]');
+		const description = task.querySelector('textarea');
+		const project = task.querySelectorAll('[type="text"]')[1];
+		const checked = task.querySelector("[type='checkbox']");
+		const id = task.dataset;
 
-	title.value = obj.title;
-	priority.value = obj.priority;
-	date.value = obj.date;
-	description.value = obj.description;
-	checked.checked = obj.checked;
-	id.key = obj.id;
-	project.value = obj.project;
+		title.value = item.title;
+		priority.value = item.priority;
+		date.value = item.date;
+		description.value = item.description;
+		checked.checked = item.checked;
+		id.key = item.id;
+		project.value = item.project;
+
+		setColorPriority.call(priority);
+
+		priority.addEventListener('change', setColorPriority);
+		title.addEventListener('click', taskOpener.bind(task));
+
+		let deleteTimeout; // to reset timeout when changing mind about delete
+		checked.addEventListener('change', deleteTask.bind(null, checked, deleteTimeout, task));
+
+		taskContainer.prepend(task);
+		setTimeout(() => task.classList.remove('task_fading'), 100);
+	});
 }

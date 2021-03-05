@@ -7,8 +7,14 @@ module.exports = {
 		path: path.resolve(__dirname, 'dist'),
 	},
 	watch: true,
-	watchOptions: {
-		aggregateTimeout: 600,
-		ignored: /node_modules/,
+	resolve: {
+		fallback: {
+			util: require.resolve('util/'),
+			path: require.resolve('path-browserify'),
+			crypto: require.resolve('crypto-browserify'),
+			buffer: require.resolve('buffer/'),
+			https: require.resolve('https-browserify'),
+			url: require.resolve('url/'),
+		},
 	},
 };

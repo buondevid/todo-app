@@ -1,17 +1,10 @@
-import { renderTask, taskArr } from './objects';
+import { renderTasks, taskArr } from './objects';
 
 const calendar = document.querySelector('.fa-calendar-alt');
 
-calendar.addEventListener('click', () => {
-	taskArr.forEach((item) => {
-		renderTask(item);
-	});
-});
+calendar.addEventListener('click', renderTasks.bind(null, taskArr));
 
-function filterTasks(string) {
-	const filteredArray = taskArr.filter((item, index) => {
-		return string === item.project;
-	});
-
-	filteredArray.forEach((item) => renderTask(item));
+export function filterProjectTasks(string) {
+	const filteredArray = taskArr.filter((item) => string === item.project);
+	renderTasks(filteredArray);
 }
