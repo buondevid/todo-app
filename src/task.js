@@ -6,8 +6,10 @@ const taskContainer = document.getElementsByClassName('container__tasks')[0];
 
 // makes task full size
 export function taskOpener() {
-	if ((this.style.maxHeight === '' || this.style.maxHeight === '7rem')) {
+	if ((this.style.height === '')) {
 		this.style.height = '35rem';
+	} else if (this.style.height === '35rem' && !this.children[1].classList.contains('task_edit-active')) {
+		this.style.height = '';
 	}
 }
 
@@ -73,8 +75,7 @@ export function stopEdit(e) {
 }
 
 export function setColorPriority() {
-	console.log(this);
-	// this.parentElement.className = 'task';
+	this.parentElement.classList.remove('task_normal', 'task_medium', 'task_urgent');
 	switch (this.value) {
 	case 'Normal':
 		this.parentElement.classList.add('task_normal');
@@ -147,5 +148,5 @@ export function taskDOMCreator() {
 	// fade in transition task rendered
 	setTimeout(() => task.classList.remove('task_fading'), 100);
 
-	console.log(taskArr);
+	console.log(`taskArr:  + ${taskArr}`);
 }
