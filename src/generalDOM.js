@@ -1,7 +1,7 @@
-import { renderProjects, filterProjectTasks } from './projects';
-import {
-	taskDOMCreator, minifyTask, editTask, stopEdit,
-} from './task';
+import { renderProjects, filterProjectTasks, updateProjects } from './projects';
+// eslint-disable-next-line object-curly-newline
+import { minifyTask, editTask, stopEdit, taskOpener, setColorPriority } from './task';
+import { createTask, deleteTask } from './objects';
 
 const containerProject = document.querySelector('.container__project');
 
@@ -19,6 +19,56 @@ containerProject.addEventListener('click', (e) => {
 const taskContainer = document.querySelector('.container__tasks');
 const newButton = document.getElementsByClassName('new-button')[0];
 
+function taskDOMCreator() {
+	const task = document.createElement('div');
+	task.classList.add('task', 'task_fading');
+	task.setAttribute('data-key', Date.now());
+	task.innerHTML = `
+				<div class="task__first-line">
+					<input readonly type="text" placeholder="> Title">
+					<label class="checkbox">
+						<span class="checkbox__input">
+							<input type="checkbox" name="checked">
+							<span class="checkbox__control">
+								<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+									<path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' />
+								</svg>
+							</span>
+						</span>
+					</label>
+					<!-- <input type="checkbox"> -->
+				</div>
+				<select disabled>
+					<option selected disabled>> Priority</option>
+					<option>Normal</option>
+					<option>Timely</option>
+					<option>Urgent</option>
+				</select>
+				<input readonly type="date">
+				<textarea readonly placeholder="> Description"></textarea>
+				<input type='text' placeholder='> Project' readonly>
+				<div class="task__edit">
+					<a href="#"><i class="far fa-check-circle"></i></a>
+					<a href="#"><i class="far fa-edit"></i></a>
+				</div>`;
+
+	const input = task.querySelector('input[type="checkbox"]');
+	const input1 = task.getElementsByTagName('input')[0];
+	const select = task.querySelector('select');
+
+	input1.addEventListener('click', taskOpener.bind(task)); // open modal
+	select.addEventListener('change', setColorPriority);
+
+	// to reset timeout when changing mind about delete
+	input.addEventListener('change', () => {
+		deleteTask(input, task);
+	});
+
+	taskContainer.prepend(task);
+	// fade in transition task rendered
+	setTimeout(() => task.classList.remove('task_fading'), 100);
+}
+
 // module to attach event listeners at DOMload
 (function init() {
 	taskDOMCreator();
@@ -29,7 +79,11 @@ const newButton = document.getElementsByClassName('new-button')[0];
 	taskContainer.addEventListener('click', (e) => {
 		minifyTask(e);
 		editTask(e);
-		stopEdit(e);
+		if (e.target.classList.contains('fa-check-circle')) {
+			createTask(e);
+			updateProjects(e);
+			stopEdit(e);
+		}
 	});
 	newButton.addEventListener('click', taskDOMCreator); // create a new task
 }());

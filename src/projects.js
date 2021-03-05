@@ -22,6 +22,19 @@ export function renderProjects() {
 	});
 }
 
+// CREATE or UPDATE projects html and arrayProjects (from task form)
+export const updateProjects = (e) => {
+	if (e.target.classList.contains('fa-check-circle')) {
+		const task = e.target.closest('.task');
+		const textInput2 = task.querySelectorAll('input[type="text"]')[1];
+		const tag = textInput2.value.toUpperCase() || 'ALL';
+		if (!arrProjects.includes(tag)) {
+			arrProjects.push(tag);
+			renderProjects();
+		}
+	}
+};
+
 // eslint-disable-next-line import/no-mutable-exports
 export let filteredArrayPerProjects = taskArr;
 export function filterProjectTasks(string) {
@@ -31,6 +44,5 @@ export function filterProjectTasks(string) {
 	} else {
 		filteredArrayPerProjects = taskArr.filter((item) => string === item.project);
 		renderTasks(filteredArrayPerProjects);
-		console.log(`filteredArrayPerProjects:  + ${filteredArrayPerProjects}`);
 	}
 }

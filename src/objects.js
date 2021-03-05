@@ -1,5 +1,5 @@
 // import { arrProjects, renderProjects } from './projects';
-import { taskOpener, setColorPriority, deleteTask } from './task';
+import { taskOpener, setColorPriority } from './task';
 
 export const taskArr = [];
 
@@ -49,10 +49,19 @@ export function createTask(e) {
 		const index = taskArr.findIndex((item) => item.id === taskPanel.dataset.key);
 		taskArr[index] = task;
 	} else taskArr.push(task);
+}
 
-	// taskArr.forEach((obj) => {
-	// 	renderTask(obj);
-	// });
+let varTimeout;
+export function deleteTask(input, task) {
+	clearTimeout(varTimeout);
+	if (input.checked === true) input.closest('.task').classList.add('task_erasing');
+	else input.closest('.task').classList.remove('task_erasing');
+	varTimeout = setTimeout(() => {
+		input.checked && input.closest('.task').remove(); // delete task because it's done
+		// eslint-disable-next-line max-len
+		taskArr.splice(taskArr.findIndex((item) => item.id !== task.dataset.key), 1); // find and delete object in array
+	},
+	3000);
 }
 
 export function renderTasks(array) {
@@ -113,8 +122,7 @@ export function renderTasks(array) {
 		priority.addEventListener('change', setColorPriority);
 		title.addEventListener('click', taskOpener.bind(task));
 
-		let deleteTimeout; // to reset timeout when changing mind about delete
-		checked.addEventListener('change', deleteTask.bind(null, checked, deleteTimeout, task));
+		checked.addEventListener('change', deleteTask.bind(null, checked, task));
 
 		taskContainer.prepend(task);
 		setTimeout(() => task.classList.remove('task_fading'), 100);
