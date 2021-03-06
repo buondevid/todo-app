@@ -1,4 +1,4 @@
-import { renderProjects, filterProjectTasks, updateProjects } from './projects';
+import { renderProjects, filterProjectTasks, updateProjects, deleteProject } from './projects';
 // eslint-disable-next-line object-curly-newline
 import { minifyTask, editTask, stopEdit, taskOpener, setColorPriority } from './task';
 import { createTask, deleteTask } from './objects';
@@ -7,7 +7,10 @@ const containerProject = document.querySelector('.container__project');
 
 containerProject.addEventListener('click', (e) => {
 	const projectsButtons = containerProject.querySelectorAll('.project');
-	if (e.target.classList.contains('project')) {
+	if (e.detail === 3 && e.target.classList.contains('project')) {
+		deleteProject(e);
+	}
+	if (e.detail === 1 && e.target.classList.contains('project')) {
 		filterProjectTasks(e.target.textContent);
 		projectsButtons.forEach((button) => {
 			button.classList.remove('project_active');

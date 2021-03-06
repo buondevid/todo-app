@@ -8,4 +8,7 @@ module.exports = {
 		path: path.resolve(__dirname, 'dist'),
 	},
 	watch: true,
+	watchOptions: {
+		aggregateTimeout: 600,
+	},
 };

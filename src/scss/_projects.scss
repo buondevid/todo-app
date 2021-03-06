@@ -35,6 +35,18 @@
 	border-radius: 20rem;
 	-webkit-border-radius: 20rem;
 	transition: transform 0.3s ease;
+	position: relative;
+
+	@media (max-width: 900px) {
+		margin: 0.6rem;
+		}
+
+	i {
+		font-size: 1.5rem;
+		position: absolute;
+		z-index: 1;
+		top: 20%;
+	}
 
 	&:active {
 		box-shadow: rgb(162, 135, 255) 2px 2px 4px 0px, rgb(120, 99, 196) -2px -2px 4px 0px;

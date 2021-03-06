@@ -16,6 +16,9 @@
 	&::-webkit-scrollbar {
 		display: none; /* Chrome, Safari, Opera */
 	}
+
+	@media (max-width: 900px) {
+		}
 }
 
 .task {
@@ -35,6 +38,11 @@
 	transition: height 0.5s ease-out, opacity 0.5s ease-out;
 	flex-shrink: 0;
 
+	@media (max-width: 900px) {
+		font-size: 90%;
+		height: 7rem;
+		}
+
 	input,
 	textarea,
 	select {
@@ -53,14 +61,23 @@
 		padding-left: 0.7rem;
 		border-style: none;
 
-		&::placeholder {
+		@media (max-width: 900px) {
 			color: rgb(198, 184, 248);
+			}
+
+		&::placeholder {
+			color: rgb(162, 135, 255);
 		}
 	}
 
 //had to increase specifity to override rules
 	#{&}_edit-active[class] {
 	outline: 0.2rem solid rgb(162, 135, 255);
+	color: rgb(162, 135, 255);
+
+		&::placeholder{
+			color: rgb(162, 135, 255);
+		}
 	}
 
 	input[type='checkbox'] {
@@ -74,6 +91,7 @@
 		padding: 0.35rem 0.2rem;
 		position:relative;
 		bottom:-0.1rem;
+		color: rgba(198, 184, 248, 0.836);
 
 		option {
 			background-color: $purple;
@@ -82,17 +100,19 @@
 		&:disabled {
 			border: 0.01rem solid grey;
 		}
+
 	}
 
 	input[type='date'] {
 		padding: 0 1rem;
+		color: rgba(198, 184, 248, 0.527);
 
 		&::-webkit-calendar-picker-indicator {
 			cursor: pointer;
 			border-radius: 4px;
 			margin-right: 2px;
 			opacity: 0.6;
-			filter: invert(0.7);
+			filter: invert(1);
 		}
 
 		&::-webkit-calendar-picker-indicator:hover {
@@ -106,7 +126,7 @@
 		padding-left: 0.5rem;
 
 		&::placeholder {
-			color: rgb(198, 184, 248);
+			color:  rgba(198, 184, 248, 0.527);
 		}
 	}
 

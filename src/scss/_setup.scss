@@ -14,6 +14,9 @@ $orange: #d65108;
 html {
 	font-size: 62.5%;
 	/* height: -webkit-fill-available;  to make 100vh look good on mobile*/
+	@media (max-width: 900px) {
+	font-size: 50%;
+	}
 }
 
 body {
@@ -25,6 +28,10 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	@media (max-width: 900px) {
+		height: 85vh;
+		}
 }
 
 img,
@@ -38,7 +45,7 @@ button,
 textarea,
 select {
 	font: inherit;
-	color: inherit;
+	// color: inherit;
 	letter-spacing: inherit;
 	cursor: pointer;
 }
