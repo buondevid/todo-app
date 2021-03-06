@@ -10,6 +10,11 @@ html {
   font-size: 62.5%;
   /* height: -webkit-fill-available;  to make 100vh look good on mobile*/
 }
+@media (max-width: 900px) {
+  html {
+    font-size: 50%;
+  }
+}
 
 body {
   height: 100vh;
@@ -20,6 +25,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+@media (max-width: 900px) {
+  body {
+    height: 85vh;
+  }
 }
 
 img,
@@ -33,7 +43,6 @@ button,
 textarea,
 select {
   font: inherit;
-  color: inherit;
   letter-spacing: inherit;
   cursor: pointer;
 }
@@ -89,6 +98,13 @@ a {
   width: 80%;
   height: 80%;
 }
+@media (max-width: 900px) {
+  .container {
+    grid-template: 1.5fr 0.5fr 3fr/1fr;
+    grid-template-areas: "projects" "sort" "tasks";
+    min-height: 80%;
+  }
+}
 
 .container__border1 {
   grid-area: border1;
@@ -141,6 +157,18 @@ a {
   border-radius: 20rem;
   -webkit-border-radius: 20rem;
   transition: transform 0.3s ease;
+  position: relative;
+}
+@media (max-width: 900px) {
+  .project {
+    margin: 0.6rem;
+  }
+}
+.project i {
+  font-size: 1.5rem;
+  position: absolute;
+  z-index: 1;
+  top: 20%;
 }
 .project:active {
   box-shadow: #a287ff 2px 2px 4px 0px, #7863c4 -2px -2px 4px 0px;
@@ -173,7 +201,6 @@ a {
   display: none;
   /* Chrome, Safari, Opera */
 }
-
 .task {
   padding: 1rem 2rem;
   margin: 0.5rem;
@@ -188,6 +215,12 @@ a {
   -webkit-box-shadow: #151518 0.3rem 0.6rem 0.3rem 0.2rem inset, #404147 -0.3rem -0.3rem 0.6rem 0.2rem inset;
   transition: height 0.5s ease-out, opacity 0.5s ease-out;
   flex-shrink: 0;
+}
+@media (max-width: 900px) {
+  .task {
+    font-size: 90%;
+    height: 7rem;
+  }
 }
 .task input,
 .task textarea,
@@ -205,17 +238,32 @@ a {
   padding-left: 0.7rem;
   border-style: none;
 }
+@media (max-width: 900px) {
+  .task input[type=text] {
+    color: #c6b8f8;
+  }
+}
 .task input[type=text]::-moz-placeholder {
-  color: #c6b8f8;
+  color: #a287ff;
 }
 .task input[type=text]:-ms-input-placeholder {
-  color: #c6b8f8;
+  color: #a287ff;
 }
 .task input[type=text]::placeholder {
-  color: #c6b8f8;
+  color: #a287ff;
 }
 .task .task_edit-active[class] {
   outline: 0.2rem solid #a287ff;
+  color: #a287ff;
+}
+.task .task_edit-active[class]::-moz-placeholder {
+  color: #a287ff;
+}
+.task .task_edit-active[class]:-ms-input-placeholder {
+  color: #a287ff;
+}
+.task .task_edit-active[class]::placeholder {
+  color: #a287ff;
 }
 .task input[type=checkbox] {
   width: 2rem;
@@ -227,6 +275,7 @@ a {
   padding: 0.35rem 0.2rem;
   position: relative;
   bottom: -0.1rem;
+  color: rgba(198, 184, 248, 0.836);
 }
 .task select option {
   background-color: #8d75e6;
@@ -236,13 +285,14 @@ a {
 }
 .task input[type=date] {
   padding: 0 1rem;
+  color: rgba(198, 184, 248, 0.527);
 }
 .task input[type=date]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   border-radius: 4px;
   margin-right: 2px;
   opacity: 0.6;
-  filter: invert(0.7);
+  filter: invert(1);
 }
 .task input[type=date]::-webkit-calendar-picker-indicator:hover {
   opacity: 1;
@@ -253,13 +303,13 @@ a {
   padding-left: 0.5rem;
 }
 .task textarea::-moz-placeholder {
-  color: #c6b8f8;
+  color: rgba(198, 184, 248, 0.527);
 }
 .task textarea:-ms-input-placeholder {
-  color: #c6b8f8;
+  color: rgba(198, 184, 248, 0.527);
 }
 .task textarea::placeholder {
-  color: #c6b8f8;
+  color: rgba(198, 184, 248, 0.527);
 }
 .task > input:last-of-type {
   border: 0.01rem solid grey;
@@ -370,6 +420,12 @@ a {
   justify-content: space-evenly;
   align-items: center;
 }
+@media (max-width: 900px) {
+  .container__sort {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
 .container__sort button {
   width: 4rem;
   height: 4rem;
@@ -381,6 +437,11 @@ a {
   border-radius: 50%;
   box-shadow: #7863c4 0.3rem 0.3rem 4px 1px, #a287ff -0.3rem -0.3rem 4px 1px;
   transition: transform 0.3s ease;
+}
+@media (max-width: 900px) {
+  .container__sort button {
+    margin: 0 2rem;
+  }
 }
 .container__sort button:active {
   box-shadow: #a287ff 1px 1px 1px 1px, #a287ff -1px -1px 1px 1px;
