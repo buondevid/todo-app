@@ -9,6 +9,7 @@
 html {
   font-size: 62.5%;
   /* height: -webkit-fill-available;  to make 100vh look good on mobile*/
+  touch-action: manipulation;
 }
 @media (max-width: 900px) {
   html {
@@ -100,7 +101,7 @@ a {
 }
 @media (max-width: 900px) {
   .container {
-    grid-template: 1.5fr 0.5fr 3fr/1fr;
+    grid-template: 2fr 0.5fr 3fr/1fr;
     grid-template-areas: "projects" "sort" "tasks";
     min-height: 80%;
   }
@@ -237,10 +238,12 @@ a {
   width: 90%;
   padding-left: 0.7rem;
   border-style: none;
+  color: inherit;
 }
 @media (max-width: 900px) {
   .task input[type=text] {
     color: #c6b8f8;
+    margin-bottom: 2rem;
   }
 }
 .task input[type=text]::-moz-placeholder {
@@ -287,6 +290,12 @@ a {
   padding: 0 1rem;
   color: rgba(198, 184, 248, 0.527);
 }
+@media (max-width: 900px) {
+  .task input[type=date] {
+    height: 2rem;
+    width: 13rem;
+  }
+}
 .task input[type=date]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   border-radius: 4px;
@@ -301,6 +310,7 @@ a {
   width: 96.5%;
   height: 15rem;
   padding-left: 0.5rem;
+  color: inherit;
 }
 .task textarea::-moz-placeholder {
   color: rgba(198, 184, 248, 0.527);
@@ -310,6 +320,11 @@ a {
 }
 .task textarea::placeholder {
   color: rgba(198, 184, 248, 0.527);
+}
+@media (max-width: 900px) {
+  .task textarea {
+    height: 10rem;
+  }
 }
 .task > input:last-of-type {
   border: 0.01rem solid grey;
@@ -450,7 +465,7 @@ a {
 .container__sort button:hover {
   transform: scale(1.2);
 }
-.container__sort button:focus {
+.container__sort ._active {
   color: white;
-  background: linear-gradient(to bottom right, #f99158, #d65108);
+  background: linear-gradient(to bottom right, #f87f3d, #d65108);
 }/*# sourceMappingURL=style.css.map */

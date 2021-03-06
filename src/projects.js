@@ -24,18 +24,18 @@ export function renderProjects() {
 
 let xTimeout;
 export function deleteProject(e) {
-	console.log(e.target);
 	clearTimeout(xTimeout);
 	if (e.target.style.background !== 'rgba(255, 0, 0, 0.2)') {
 		e.target.style.background = 'rgba(255, 0, 0, 0.2)';
 	} else if (e.target.style.background === 'rgba(255, 0, 0, 0.2)') {
-		console.log(e.target.style.background);
 		e.target.style.background = '';
 	}
 	xTimeout = setTimeout(() => {
-		e.target.style.background === 'rgba(255, 0, 0, 0.2)' && e.target.remove(); // delete task because it's done
-		arrProjects.splice(arrProjects.findIndex((item) => item.project !== e.target.innerText), 1);
-		renderProjects(); // find and delete object in array
+		if (e.target.style.background === 'rgba(255, 0, 0, 0.2)') {
+			e.target.remove(); // delete task because it's done
+			arrProjects.splice(arrProjects.findIndex((item) => item.project !== e.target.innerText), 1);
+			renderProjects(); // find and delete object in array
+		}
 	},
 	3000);
 }

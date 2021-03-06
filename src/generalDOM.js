@@ -1,4 +1,6 @@
-import { renderProjects, filterProjectTasks, updateProjects, deleteProject } from './projects';
+import {
+	renderProjects, filterProjectTasks, updateProjects, deleteProject,
+} from './projects';
 // eslint-disable-next-line object-curly-newline
 import { minifyTask, editTask, stopEdit, taskOpener, setColorPriority } from './task';
 import { createTask, deleteTask } from './objects';
@@ -55,6 +57,10 @@ function taskDOMCreator() {
 					<a href="#"><i class="far fa-edit"></i></a>
 				</div>`;
 
+	function countInArray(array, what) {
+		return array.filter((item) => item == what).length;
+	}
+
 	const input = task.querySelector('input[type="checkbox"]');
 	const input1 = task.getElementsByTagName('input')[0];
 	const select = task.querySelector('select');
@@ -62,9 +68,18 @@ function taskDOMCreator() {
 	input1.addEventListener('click', taskOpener.bind(task)); // open modal
 	select.addEventListener('change', setColorPriority);
 
-	// to reset timeout when changing mind about delete
 	input.addEventListener('change', () => {
-		deleteTask(input, task);
+		const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+		const arrayCheck = [];
+		allCheckboxes.forEach((item) => {
+			const bool = item.checked;
+			arrayCheck.push(bool);
+		});
+		if (countInArray(arrayCheck, true) > 1) {
+			input.checked = false;
+			return;
+		}
+		deleteTask.a(input, task);
 	});
 
 	taskContainer.prepend(task);

@@ -60,9 +60,11 @@
 		width: 90%;
 		padding-left: 0.7rem;
 		border-style: none;
+		color:inherit;
 
 		@media (max-width: 900px) {
 			color: rgb(198, 184, 248);
+			margin-bottom: 2rem;
 			}
 
 		&::placeholder {
@@ -107,6 +109,11 @@
 		padding: 0 1rem;
 		color: rgba(198, 184, 248, 0.527);
 
+		@media (max-width: 900px) {
+			height: 2rem;
+			width: 13rem;
+		}
+
 		&::-webkit-calendar-picker-indicator {
 			cursor: pointer;
 			border-radius: 4px;
@@ -124,10 +131,15 @@
 		width: 96.5%;
 		height: 15rem;
 		padding-left: 0.5rem;
+		color: inherit;
 
 		&::placeholder {
 			color:  rgba(198, 184, 248, 0.527);
 		}
+
+		@media (max-width: 900px) {
+			height: 10rem;
+			}
 	}
 
 	> input:last-of-type {

@@ -51,18 +51,23 @@ export function createTask(e) {
 	} else taskArr.push(task);
 }
 
-let varTimeout;
-export function deleteTask(input, task) {
-	clearTimeout(varTimeout);
-	if (input.checked === true) input.closest('.task').classList.add('task_erasing');
-	else input.closest('.task').classList.remove('task_erasing');
-	varTimeout = setTimeout(() => {
-		input.checked && input.closest('.task').remove(); // delete task because it's done
-		// eslint-disable-next-line max-len
-		taskArr.splice(taskArr.findIndex((item) => item.id !== task.dataset.key), 1); // find and delete object in array
-	},
-	3000);
+// creating a module for persistence of varTimeout
+export const deleteTask = (() => {
+	let varTimeout;
+	function a(input, task) {
+		clearTimeout(varTimeout);
+		if (input.checked === true) input.closest('.task').classList.add('task_erasing');
+		else input.closest('.task').classList.remove('task_erasing');
+		varTimeout = setTimeout(() => {
+			input.checked && input.closest('.task').remove(); // delete task because it's done
+			// eslint-disable-next-line max-len
+			taskArr.splice(taskArr.findIndex((item) => item.id !== task.dataset.key), 1); // find and delete object in array
+		},
+		3000);
+	}
+	return { a };
 }
+)();
 
 export function renderTasks(array) {
 	const taskContainer = document.querySelector('.container__tasks');
@@ -117,12 +122,28 @@ export function renderTasks(array) {
 		id.key = item.id;
 		project.value = item.project;
 
+		function countInArray(array1, what) {
+			return array1.filter((item1) => item1 == what).length;
+		}
+
 		setColorPriority.call(priority);
 
 		priority.addEventListener('change', setColorPriority);
 		title.addEventListener('click', taskOpener.bind(task));
 
-		checked.addEventListener('change', deleteTask.bind(null, checked, task));
+		checked.addEventListener('change', () => {
+			const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+			const arrayCheck = [];
+			allCheckboxes.forEach((item1) => {
+				const bool = item1.checked;
+				arrayCheck.push(bool);
+			});
+			if (countInArray(arrayCheck, true) > 1) {
+				checked.checked = false;
+				return;
+			}
+			deleteTask.a(checked, task);
+		});
 
 		taskContainer.prepend(task);
 		setTimeout(() => task.classList.remove('task_fading'), 100);

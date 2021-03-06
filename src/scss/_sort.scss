@@ -37,10 +37,11 @@
 		&:hover {
 			transform: scale(1.2);
 		}
-
-		&:focus {
-			color: white;
-			background: linear-gradient(to bottom right, color.scale($orange, $lightness: 40%), $orange);
-		}
 	}
+
+	._active {
+		color: white;
+		background: linear-gradient(to bottom right, #f87f3d, #d65108);
+		}
 }
+
