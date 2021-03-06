@@ -247,13 +247,13 @@ a {
   }
 }
 .task input[type=text]::-moz-placeholder {
-  color: #a287ff;
+  color: rgba(198, 184, 248, 0.527);
 }
 .task input[type=text]:-ms-input-placeholder {
-  color: #a287ff;
+  color: rgba(198, 184, 248, 0.527);
 }
 .task input[type=text]::placeholder {
-  color: #a287ff;
+  color: rgba(198, 184, 248, 0.527);
 }
 .task .task_edit-active[class] {
   outline: 0.2rem solid #a287ff;
@@ -330,6 +330,15 @@ a {
   border: 0.01rem solid grey;
   width: 15rem;
 }
+.task > input:last-of-type::-moz-placeholder {
+  color: rgba(198, 184, 248, 0.527);
+}
+.task > input:last-of-type:-ms-input-placeholder {
+  color: rgba(198, 184, 248, 0.527);
+}
+.task > input:last-of-type::placeholder {
+  color: rgba(198, 184, 248, 0.527);
+}
 .task__first-line {
   display: flex;
   justify-content: space-between;
@@ -384,6 +393,22 @@ a {
   }
   50% {
     background-color: initial;
+  }
+}
+@-webkit-keyframes proj {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+@keyframes proj {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
   }
 }
 .checkbox {

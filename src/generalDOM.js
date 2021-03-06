@@ -28,6 +28,7 @@ function taskDOMCreator() {
 	const task = document.createElement('div');
 	task.classList.add('task', 'task_fading');
 	task.setAttribute('data-key', Date.now());
+	task.setAttribute('tabindex', '0');
 	task.innerHTML = `
 				<div class="task__first-line">
 					<input readonly type="text" placeholder="> Title">
@@ -64,6 +65,12 @@ function taskDOMCreator() {
 	const input = task.querySelector('input[type="checkbox"]');
 	const input1 = task.getElementsByTagName('input')[0];
 	const select = task.querySelector('select');
+
+	// task.addEventListener('keydown', (e) => {
+	// 	if (e.keyCode === 13) {
+	// 		console.log('ciao');
+	// 	}
+	// });
 
 	input1.addEventListener('click', taskOpener.bind(task)); // open modal
 	select.addEventListener('change', setColorPriority);

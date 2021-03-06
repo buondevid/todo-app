@@ -22,22 +22,28 @@ export function renderProjects() {
 	});
 }
 
+let executed = true;
 let xTimeout;
 export function deleteProject(e) {
-	clearTimeout(xTimeout);
-	if (e.target.style.background !== 'rgba(255, 0, 0, 0.2)') {
-		e.target.style.background = 'rgba(255, 0, 0, 0.2)';
-	} else if (e.target.style.background === 'rgba(255, 0, 0, 0.2)') {
-		e.target.style.background = '';
-	}
-	xTimeout = setTimeout(() => {
-		if (e.target.style.background === 'rgba(255, 0, 0, 0.2)') {
-			e.target.remove(); // delete task because it's done
-			arrProjects.splice(arrProjects.findIndex((item) => item.project !== e.target.innerText), 1);
-			renderProjects(); // find and delete object in array
+	if (e.target.innerText !== 'ALL') {
+		if (e.target.style.animation !== '1s ease 0s infinite normal none running proj' && executed) {
+			executed = false;
+			e.target.style.animation = 'proj 1s infinite';
+			xTimeout = setTimeout(() => {
+				if (e.target.style.animation === '1s ease 0s infinite normal none running proj') {
+					e.target.remove(); // delete task because it's done
+					arrProjects.splice(arrProjects.findIndex((item) => item.project === e.target.innerText), 1);
+					renderProjects(); // find and delete object in array
+					executed = true;
+				}
+			},
+			3000);
+		} else if (e.target.style.animation === '1s ease 0s infinite normal none running proj') {
+			clearTimeout(xTimeout);
+			e.target.style.animation = '';
+			executed = true;
 		}
-	},
-	3000);
+	}
 }
 
 // let varTimeout;

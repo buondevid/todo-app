@@ -68,7 +68,7 @@
 			}
 
 		&::placeholder {
-			color: rgb(162, 135, 255);
+			color: rgba(198, 184, 248, 0.527);
 		}
 	}
 
@@ -145,6 +145,10 @@
 	> input:last-of-type {
 		border: 0.01rem solid grey;
 		width: 15rem;
+
+		&::placeholder {
+			color:  rgba(198, 184, 248, 0.527);
+		}
 	}
 
 	&__first-line {
@@ -201,5 +205,15 @@
 	}
 	50% {
 		background-color: initial;
+	}
+}
+
+@keyframes proj {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.2;
 	}
 }

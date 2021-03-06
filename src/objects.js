@@ -76,6 +76,7 @@ export function renderTasks(array) {
 	array.forEach((item) => {
 		const task = document.createElement('div');
 		task.classList.add('task', 'task_fading');
+		task.setAttribute('tabindex', '0');
 
 		task.innerHTML = `
 				<div class="task__first-line">
@@ -125,6 +126,15 @@ export function renderTasks(array) {
 		function countInArray(array1, what) {
 			return array1.filter((item1) => item1 == what).length;
 		}
+
+		// task.addEventListener('keydown', (e) => {
+		// 	if (e.keyCode === 13) {
+		// 		console.log('render');
+		// 		createTask(e);
+		// 		updateProjects(e);
+		// 		stopEdit(e);
+		// 	}
+		// });
 
 		setColorPriority.call(priority);
 
