@@ -117,7 +117,7 @@ export function renderTasks(array) {
 				<option>Timely</option>
 				<option>Urgent</option>
 			</select>
-			<input readonly type="date" max="9999-12-31">
+			<input readonly type="date">
 			<textarea readonly placeholder="Description"></textarea>
 			<input type='text' placeholder=' Project' readonly>
 			<div class="task__edit">
