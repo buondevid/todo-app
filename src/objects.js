@@ -1,7 +1,22 @@
 // import { arrProjects, renderProjects } from './projects';
 import { taskOpener, setColorPriority } from './task';
 
-export const taskArr = [];
+export let taskArr = [{
+	title: 'Register your first todo!!', priority: '> Priority', date: '', description: '', project: 'SADSADAS', checked: false, id: '1615078252995'
+} ];
+
+console.log(typeof taskArr);
+
+function setStorage() {
+	taskArr = JSON.parse(localStorage.getItem('taskArr'));
+}
+
+// localStorage.clear();
+(localStorage.length !== 0 && localStorage.taskArr !== []) && setStorage(); // load local storage
+
+export function populateStorageTask() {
+	localStorage.setItem('taskArr', JSON.stringify(taskArr));
+}
 
 // factory function to create todo
 function taskFactory(
@@ -48,7 +63,11 @@ export function createTask(e) {
 	if (taskArr.findIndex((item) => item.id === taskPanel.dataset.key) > -1) {
 		const index = taskArr.findIndex((item) => item.id === taskPanel.dataset.key);
 		taskArr[index] = task;
-	} else taskArr.push(task);
+		populateStorageTask();
+	} else {
+		taskArr.push(task);
+		populateStorageTask();
+	}
 }
 
 // creating a module for persistence of varTimeout
@@ -62,6 +81,7 @@ export const deleteTask = (() => {
 			input.checked && input.closest('.task').remove(); // delete task because it's done
 			// eslint-disable-next-line max-len
 			taskArr.splice(taskArr.findIndex((item) => item.id !== task.dataset.key), 1); // find and delete object in array
+			populateStorageTask();
 		},
 		3000);
 	}
@@ -69,11 +89,11 @@ export const deleteTask = (() => {
 }
 )();
 
-export function renderTasks(array) {
+export function renderTasks() {
 	const taskContainer = document.querySelector('.container__tasks');
 	taskContainer.innerHTML = '';
 
-	array.forEach((item) => {
+	taskArr.length !== 0 && taskArr.forEach((item) => {
 		const task = document.createElement('div');
 		task.classList.add('task', 'task_fading');
 		task.setAttribute('tabindex', '0');

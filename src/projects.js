@@ -1,6 +1,17 @@
 import { renderTasks, taskArr } from './objects';
 
-export const arrProjects = ['ALL', 'FINANCE', 'GROCERY'];
+export let arrProjects = ['ALL', 'FINANCE', 'GROCERY'];
+
+function setStorage() {
+	arrProjects = JSON.parse(localStorage.getItem('arrProjects'));
+}
+
+// localStorage.clear();
+(localStorage.length !== 0 && Object.prototype.hasOwnProperty.call(localStorage, 'arrProjects') && localStorage.arrProjects !== []) && setStorage(); // load storage
+
+export function populateStorageProjects() {
+	localStorage.setItem('arrProjects', JSON.stringify(arrProjects));
+}
 
 export function addProjectToArr(string) {
 	const newString = string.toLowerCase();
@@ -8,6 +19,7 @@ export function addProjectToArr(string) {
 		return;
 	}
 	arrProjects.push(newString);
+	populateStorageProjects();
 }
 
 export function renderProjects() {
@@ -31,8 +43,9 @@ export function deleteProject(e) {
 			e.target.style.animation = 'proj 1s infinite';
 			xTimeout = setTimeout(() => {
 				if (e.target.style.animation === '1s ease 0s infinite normal none running proj') {
-					e.target.remove(); // delete task because it's done
-					arrProjects.splice(arrProjects.findIndex((item) => item.project === e.target.innerText), 1);
+					e.target.remove(); // delete project from DOM
+					arrProjects.splice(arrProjects.findIndex((item) => item === e.target.innerText), 1);
+					populateStorageProjects();
 					renderProjects(); // find and delete object in array
 					executed = true;
 				}
@@ -46,19 +59,6 @@ export function deleteProject(e) {
 	}
 }
 
-// let varTimeout;
-// export function deleteTask(input, task) {
-// 	clearTimeout(varTimeout);
-// 	if (input.checked === true) input.closest('.task').classList.add('task_erasing');
-// 	else input.closest('.task').classList.remove('task_erasing');
-// 	varTimeout = setTimeout(() => {
-// 		input.checked && input.closest('.task').remove(); // delete task because it's done
-// 		// eslint-disable-next-line max-len
-// 		taskArr.splice(taskArr.findIndex((item) => item.id !== task.dataset.key), 1); // find and delete object in array
-// 	},
-// 	3000);
-// }
-
 // CREATE or UPDATE projects html and arrayProjects (from task form)
 export const updateProjects = (e) => {
 	if (e.target.classList.contains('fa-check-circle')) {
@@ -67,6 +67,7 @@ export const updateProjects = (e) => {
 		const tag = textInput2.value.toUpperCase() || 'ALL';
 		if (!arrProjects.includes(tag)) {
 			arrProjects.push(tag);
+			populateStorageProjects();
 			renderProjects();
 		}
 	}

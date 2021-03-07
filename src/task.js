@@ -25,7 +25,7 @@ export function editTask(e) {
 		const textInput2 = container.querySelectorAll('input[type="text"]')[1];
 		const arrayInput = [textInput, selectInput, dateInput, textArea, textInput2];
 
-		// ARIBNB guide doesn't suggest it...
+		// AIRBNB guide doesn't suggest it...
 		// for (const inp of arrayInput) {
 		// 	inp.removeAttribute('disabled');
 		// 	inp.removeAttribute('readonly');

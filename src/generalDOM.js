@@ -3,7 +3,7 @@ import {
 } from './projects';
 // eslint-disable-next-line object-curly-newline
 import { minifyTask, editTask, stopEdit, taskOpener, setColorPriority } from './task';
-import { createTask, deleteTask } from './objects';
+import { createTask, deleteTask, renderTasks } from './objects';
 
 const containerProject = document.querySelector('.container__project');
 
@@ -96,7 +96,8 @@ function taskDOMCreator() {
 
 // module to attach event listeners at DOMload
 (function init() {
-	taskDOMCreator();
+	// taskDOMCreator();
+	renderTasks();
 	renderProjects();
 
 	// icon Save to reduce the task window & stop Edit when you confirm
