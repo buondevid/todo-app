@@ -147,7 +147,8 @@ a {
   padding: 0.2rem 2rem;
   margin: 2rem 0;
   width: 100%;
-  max-width: 30rem;
+  max-width: 20rem;
+  overflow-x: auto;
   background-color: inherit;
   border: 0;
   outline: 0;
@@ -216,6 +217,7 @@ a {
   -webkit-box-shadow: #151518 0.3rem 0.6rem 0.3rem 0.2rem inset, #404147 -0.3rem -0.3rem 0.6rem 0.2rem inset;
   transition: height 0.5s ease-out, opacity 0.5s ease-out;
   flex-shrink: 0;
+  outline: none;
 }
 @media (max-width: 900px) {
   .task {
