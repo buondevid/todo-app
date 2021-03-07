@@ -37,6 +37,7 @@
 		rgb(64, 65, 71) -0.3rem -0.3rem 0.6rem 0.2rem inset;
 	transition: height 0.5s ease-out, opacity 0.5s ease-out;
 	flex-shrink: 0;
+	outline: none;
 
 	@media (max-width: 900px) {
 		font-size: 90%;

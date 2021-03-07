@@ -52,7 +52,7 @@ function taskDOMCreator() {
 					<option>Timely</option>
 					<option>Urgent</option>
 				</select>
-				<input readonly type="date">
+				<input readonly type="date" max="9999-12-31">
 				<textarea readonly placeholder="> Description"></textarea>
 				<input type='text' placeholder='> Project' readonly>
 				<div class="task__edit">
