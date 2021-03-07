@@ -1,0 +1,31 @@
+
+.signature {
+	position: absolute;
+	// display: inline-block;
+	font-size: 1.5rem;
+	// white-space: pre;
+	color: black;
+	bottom: 2%;
+	left: 50%;
+	transform: translateX(-50%);
+	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.199);
+	// font-weight:bold; 
+	text-decoration: none;
+	font-family: cursive;
+
+	.local-storage {
+		text-decoration: underline;
+		cursor: pointer;
+		text-align: center;
+		margin-bottom: 0.5rem;
+		color: rgba(0, 0, 0, 0.5);
+	}
+
+	a{
+		color: #d65108;
+	}
+
+	p {
+line-height: 1;	
+	}
+}

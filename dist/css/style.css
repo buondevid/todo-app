@@ -26,6 +26,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 @media (max-width: 900px) {
   body {
@@ -495,4 +496,29 @@ a {
 .container__sort ._active {
   color: white;
   background: linear-gradient(to bottom right, #f87f3d, #d65108);
+}
+
+.signature {
+  position: absolute;
+  font-size: 1.5rem;
+  color: black;
+  bottom: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-shadow: 0 0 1rem rgba(0, 0, 0, 0.199);
+  text-decoration: none;
+  font-family: cursive;
+}
+.signature .local-storage {
+  text-decoration: underline;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+.signature a {
+  color: #d65108;
+}
+.signature p {
+  line-height: 1;
 }/*# sourceMappingURL=style.css.map */

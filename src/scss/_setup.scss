@@ -29,6 +29,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: relative;
 
 	@media (max-width: 900px) {
 		height: 85vh;

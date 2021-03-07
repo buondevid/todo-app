@@ -8,7 +8,7 @@
     "build": "webpack",
     "eslint": "eslint --init",
 		"deploy": "git subtree push --prefix dist origin gh-pages",
-		"update deploy": "git push origin `git subtree split --prefix dist master`:gh-pages --force"
+		"update-deploy": "git push origin `git subtree split --prefix dist master`:gh-pages --force"
   },
   "author": "Davide Briano <davidebriano@gmail.com> (https://github.com/buondevid)",
   "license": "ISC",
