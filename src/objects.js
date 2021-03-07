@@ -2,10 +2,8 @@
 import { taskOpener, setColorPriority } from './task';
 
 export let taskArr = [{
-	title: 'Register your first todo!!', priority: '> Priority', date: '', description: '', project: 'SADSADAS', checked: false, id: '1615078252995'
-} ];
-
-console.log(typeof taskArr);
+	title: 'Register your first todo!!', priority: '> Priority', date: '', description: '', project: 'SADSADAS', checked: false, id: '1615078252995',
+}];
 
 function setStorage() {
 	taskArr = JSON.parse(localStorage.getItem('taskArr'));
@@ -89,11 +87,11 @@ export const deleteTask = (() => {
 }
 )();
 
-export function renderTasks() {
+export function renderTasks(array) {
 	const taskContainer = document.querySelector('.container__tasks');
 	taskContainer.innerHTML = '';
 
-	taskArr.length !== 0 && taskArr.forEach((item) => {
+	array.length !== 0 && array.forEach((item) => {
 		const task = document.createElement('div');
 		task.classList.add('task', 'task_fading');
 		task.setAttribute('tabindex', '0');
